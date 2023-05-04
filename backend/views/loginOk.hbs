@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Shoes Sale</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  </head>
+  <body>
+    <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="/">The Shoes Shop</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto ms-0">
+        <li class="nav-item">
+          <a class="nav-link" href="product/hombre">Men</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="product/mujer">Woman</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/product/kids">Kids</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto me-0">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Cart</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/auth/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/auth/admin">Admin</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/auth/logout">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <!-- Contenido -->
+    <div class="container mt-3">
+    <div class="text-center text-primary fw-bold mb-3"> <h3 style="font-family:Verdana, Geneva, Tahoma, sans-serif" >Bienvenido {{user.username}} </h3></div>
+    </div>
+
+    <div>Aca vamos a poner los productos que tenemos que llamar de la ruta /products</div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
