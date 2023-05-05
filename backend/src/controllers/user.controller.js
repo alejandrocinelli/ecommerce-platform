@@ -1,5 +1,6 @@
 import UserDaoFactory from "../daos/userDaoFactory.js";
 import { User } from "../models/user.model.js";
+import {Product} from "../models/product.model.js";
 import UserDTO from "../dto/userDto.js";
 import dotenv from "dotenv";
 import { dirname, join } from "path";
@@ -95,7 +96,9 @@ const getAdmin = async (req, res) => {
       //faltaria hacer un no tenes permisos para entrar aca
       if(user.admin === false){ return res.render('signup-error')}
       //aca tendriamos que llamar al modelo de productos y traer los productos
-      return res.render("adminProducts", { username : user.username});
+      const products = await Product.find().lean();
+      
+      return res.render("adminProducts", { username : user.username, products: products });
     }
 
   } catch (error) {

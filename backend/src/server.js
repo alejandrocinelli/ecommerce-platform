@@ -9,6 +9,9 @@ import { passportStrategy } from './services/passportLib.js';
 import session from 'express-session';
 import passport from 'passport';
 import {User} from "./models/user.model.js"
+import args from './yargs.js';
+import os from 'os';
+import cluster from 'cluster';
 
 const app = express();
 
@@ -16,6 +19,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+const cpu = os.cpus()
+
+if(cluster.isPrimary && args.mode.toUpperCase() ===  "cluster"){
+  cpu.map(() => cluster.fork())
+  console.log(`Master ${process.pid} is running`)
+
+  cluster.on('exit', (worker) => {
+      console.log(`Worker ${worker.process.pid} died`)
+      cluster.fork()
+  })
+  ;
+}
+else{
 
 app.engine(
     "hbs",
@@ -62,7 +79,8 @@ app.use("/", routes)
 
 connectDb();    
 
-app.listen(3000, () => {
-    console.log('Example app listening on port 3000!');
+app.listen(args.port, () => {
+    console.log(`Server listening port ${args.port}`);
     }); 
 
+  }
