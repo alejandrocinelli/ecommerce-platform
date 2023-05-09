@@ -64,7 +64,8 @@ const hashPasword = (password) => {
                 }
         
         })
-
+        // me parece que al final no lo use 
+        
         const adminUserStategy = new LocalStrategy( { passReqToCallback: true },
             async (req, username, password, done) => {
 

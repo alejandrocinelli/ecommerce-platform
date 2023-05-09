@@ -66,5 +66,25 @@ export default class MongoDao {
         console.log("Error creating document", err);
       }
     }
+
+    async deleteAll() {
+      try {
+        const deletedDocument = await this.collection.deleteMany({});
+  
+        return deletedDocument;
+      } catch (err) {
+        console.log("Error creating document", err);
+      }
+    }
+
+    async getAllByFilter(filters) {
+      try {
+        const allDocuments = await this.collection.find(filters);
+  
+        return allDocuments;
+      } catch (err) {
+        console.log("Error getting all documents", err);
+      }
+    }
   }
   

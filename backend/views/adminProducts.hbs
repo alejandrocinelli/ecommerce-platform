@@ -23,12 +23,20 @@
           <label for="thumbnail">Thumbnail</label>
           <input type="text" name="thumbnail" id="thumbnail" class="form-control" placeholder="Ingrese la URL del thumbnail del producto">
         </div>
-        <button type="submit" class="btn btn-primary">Agregar producto al carrito</button>
+        <div class="form-group">
+          <label for="title">Category</label>
+            <select name="category" id="category" class="form-control">
+              <option value="kids">Kids</option>
+              <option value="woman">Woman</option>
+              <option value="men">Men</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Add product to the database</button>
       </form>
       
       <!-- Tabla para mostrar los productos -->
       {{#if products.length}}
-      <h3 class="mb-5">Productos Cargos en la base de datos</h3>
+      <h3 class="mb-5">Products Charges in the database</h3>
      
       <table class="table table-striped">
         <thead>
@@ -36,6 +44,7 @@
             <th>Título</th>
             <th>Precio</th>
             <th>Thumbnail</th>
+            <th>Category</th>
              <th>Acciones</th>
           </tr>
         </thead>
@@ -47,12 +56,19 @@
             <td>
               <img src="{{this.thumbnail}}" alt="{{this.title}}" class="img-thumbnail" width="150">
             </td>
+            <td>{{this.category}}</td>
             <td>  <!-- Celda para el botón "Eliminar" -->
               <form action="/auth/deleteProduct/{{this._id}}" method="POST">
               <input type="hidden" name="title" value="{{this._id}}">
               <button type="submit" class="btn btn-danger">Delete</button>
             </form>
-      </td>
+            </td>
+            <td>  <!-- Celda para el botón "Modificar" -->
+              <form action="/auth/updateProduct/{{this._id}}" method="GET">
+              <input type="hidden" name="title" value="{{this._id}}">
+              <button type="submit" class="btn btn-warning">Modify</button>
+            </form>
+            </td>
           </tr>
           {{/each}}
         </tbody>

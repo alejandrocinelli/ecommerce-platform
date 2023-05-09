@@ -30,8 +30,6 @@ const createUser = async (req, res) => {
     
     const user = await daoUser.create(req.body);
 
-    
-
     res.status(201).json(user);
   } catch (err) {
     res.status(400).json({ error: err.message });
@@ -53,8 +51,9 @@ const getLogin = async (req, res) => {
     const user = req.user;
     
     const userDto = new UserDTO(user.username, user.email, user.phono);
+    const products = await Product.find().lean();
     // mailService.sendMail(user.email, user.username  )
-    return res.render("loginOk", { user: userDto });
+    return res.render("loginOk", { user: userDto , products : products });
   }
   
   res.sendFile(join(__dirname, '../../views/login.html'));
@@ -86,7 +85,7 @@ const logout = async (req, res) => {
     return res.sendFile(join(__dirname, "../../views/index2.html"));
 })
 }
-
+ 
 const getAdmin = async (req, res) => {
     
   try {

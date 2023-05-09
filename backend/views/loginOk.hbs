@@ -18,22 +18,20 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto ms-0">
         <li class="nav-item">
-          <a class="nav-link" href="product/hombre">Men</a>
+          <a class="nav-link" href="category/men">Men</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="product/mujer">Woman</a>
+          <a class="nav-link" href="category/woman">Woman</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/product/kids">Kids</a>
+          <a class="nav-link" href="category/kids">Kids</a>
         </li>
       </ul>
       <ul class="navbar-nav ms-auto me-0">
         <li class="nav-item">
           <a class="nav-link" href="#">Cart</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/auth/login">Login</a>
-        </li>
+        
         <li class="nav-item">
           <a class="nav-link" href="/auth/admin">Admin</a>
         </li>
@@ -50,7 +48,29 @@
     <div class="text-center text-primary fw-bold mb-3"> <h3 style="font-family:Verdana, Geneva, Tahoma, sans-serif" >Bienvenido {{user.username}} </h3></div>
     </div>
 
-    <div>Aca vamos a poner los productos que tenemos que llamar de la ruta /products</div>
+   
+<div class="container">
+  <div class="row">
+    <!-- Utiliza una plantilla Handlebars para generar las tarjetas -->
+    {{#each products}}
+      <div class="col-md-4 m-3">
+        <div class="card">
+          <img src="{{thumbnail}}" class="card-img-top" style="width: 50%" alt="{{title}}">
+          <div class="card-body">
+            <h5 class="card-title">{{title}}</h5>
+            <p class="card-text">Price: {{price}}</p>
+            <p class="card-text">Category: {{category}}</p>
+            <form action="/auth/addCart/{{_id}}" method="POST">
+              <input type="hidden" name="title" value="{{this._id}}">
+              <button type="submit" class="btn btn-primary">Add to the Cart</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>
+    
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
