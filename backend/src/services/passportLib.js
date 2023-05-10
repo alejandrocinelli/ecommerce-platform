@@ -2,9 +2,12 @@ import bcrypt from "bcrypt";
 import LocalStrategy from 'passport-local';
 import { User } from "../models/user.model.js";
 import UserDaoFactory from "../daos/userDaoFactory.js";
+import { Carts } from "../models/car.model.js";
+import moment from "moment";
 
- 
 const daoUser = UserDaoFactory.getDao(process.env.db);
+
+const time = moment().format("DD/MM/YYYY HH:mm:ss");
 
 const hashPasword = (password) => {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
@@ -52,7 +55,7 @@ const hashPasword = (password) => {
                    
                     const createdUser = await daoUser.create(newUser);
                     //falta crear el CART del usuario
-                    //await Carts.create({ username, products: [] });
+                    await Carts.create({ username, products: [] , email: req.body.email, time });
                     
                      req.user = createdUser;
                                    
