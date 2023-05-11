@@ -1,0 +1,55 @@
+
+<div class="container text-center  jumbotron mt-5">
+  <div class="d-flex justify-content-center">
+    
+    <form action="/auth/login" method="get" class="">
+      <input class="btn btn-primary mb-3 mr-3" type="submit" value="Volver al Login" />
+    </form>
+  </div>
+<div class="container">
+    
+  <h2><i>List of Products </i></h2>
+  {{#if products.length}}
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Price</th>
+          <th scope="col">Qty</th>
+          <th scope="col">Imagen</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each products}}
+          <tr>
+            <td>{{this.title}}</td>
+            <td>{{price}}</td>
+            <td>{{quantity}}</td>
+            <td><img src="{{thumbnail}}" alt="{{thumbnail}}" width="50"></td>
+            <td>  <!-- Celda para el botón "Eliminar 1 qty" -->
+              <form action="/auth/decrementQty/{{this._id}}" method="POST">
+              <input type="hidden" name="title" value="{{this._id}}">
+              <button type="submit" class="btn btn-danger">DeleteOne</button>
+            </form>
+            </td>
+            <td>  <!-- Celda para el botón "Agregar 1 qty" -->
+              <form action="/auth/increaseQty/{{this._id}}" method="POST">
+              <input type="hidden" name="title" value="{{this._id}}">
+              <button type="submit" class="btn btn-warning">AddOne</button>
+            </form>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    <form action="/auth/emptyCart" method="POST" class="mt-5">
+      <input class="btn btn-danger mb-3 mr-3" type="submit" value="Empty Cart" />
+    </form>
+  {{else}}
+    <p>No se encontraron productos.</p>
+  {{/if}}
+  <form action="/auth/finish" method="post" class="">
+      <input class="btn btn-primary mb-3 mr-3" type="submit" value="Finish Order" />
+    </form>
+</div>

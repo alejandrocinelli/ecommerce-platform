@@ -1,0 +1,24 @@
+<div class="container text-center my-3">
+    <div class="jumbotron" style="background-color: rgb(84, 211, 82);color: white;">
+        <h2>PRODUCT CHARGE CORRECT TO THE CART</h2>
+        <h3>Rediccionando al Login</h3>
+    </div>
+<div>
+
+</div>
+
+</div>
+
+<script>
+    function redireccionar(pagina) {
+        location.href = pagina;
+    } 
+
+    function volver() {
+        
+        setTimeout(redireccionar, 1000, '/auth/login');
+    }
+
+    volver();
+    
+</script>

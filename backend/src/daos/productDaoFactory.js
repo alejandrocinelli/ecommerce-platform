@@ -8,7 +8,7 @@ export default class ProductDaoFactory {
 
             case "mysql":
                 return new Error("Not implemented yet");
-
+ 
             default:
                 return ProductMongoDao.getInstance();
         }
