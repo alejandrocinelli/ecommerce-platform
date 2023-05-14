@@ -1,10 +1,17 @@
 import CartDaoFactory from "../daos/cartDaoFactory.js";
 import { Product } from "../models/product.model.js";
 import { User } from "../models/user.model.js";
+import {Order}  from "../models/order.model.js"
+import OrderDto from "../dto/orderDto.js"
+import UserDTO from "../dto/userDto.js";
+import { mailService } from "../services/nodemail.js";
 
+import moment from "moment";
 import dotenv from 'dotenv';
 
 dotenv.config();
+
+const time = moment().format("DD/MM/YYYY HH:mm:ss");
 
 const daoCart = CartDaoFactory.getDao(process.env.db);
 
@@ -137,9 +144,38 @@ const finishCart = async (req, res, next) => {
         const findUserNameById = await User.findById(user);
         const userNameFind = findUserNameById.username;
         const cart = await daoCart.getByFilter({username: userNameFind,});
-        const cartId = cart._id;
-        console.log(cartId);
-        res.json({cart});
+                
+        const OrdernsLength  = await Order.find() 
+
+        const orderSend = {
+            user : userNameFind,
+            products : cart.products ,
+            orderNumber : OrdernsLength.length + 1,
+            dateTime : time, 
+            status: "generada",
+            customerEmail : findUserNameById.email
+        }
+                
+        const sendOrder = await Order.create(orderSend)
+        
+        const userDto = new UserDTO(userNameFind,findUserNameById.email,findUserNameById.phono, )
+        const orderDto = new OrderDto(orderSend.products , orderSend.orderNumber)
+        
+        const sendInfoFront = {
+            user : userDto,
+            order: orderDto
+        }
+        
+     
+       // mandamos el mail con la info del usuario y la orden
+       mailService.sendMailCartPurchased(sendInfoFront)
+       
+        // falta borrar el carrito 
+       /* cart.products = [];
+        await daoCart.update(cart._id, cart);
+        console.log("carrito borrado"+ cart)*/
+      
+        res.render("finishCart",{sendInfoFront});
     } catch (error) {
         next(error);
     }

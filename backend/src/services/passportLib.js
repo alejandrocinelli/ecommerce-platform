@@ -4,6 +4,7 @@ import { User } from "../models/user.model.js";
 import UserDaoFactory from "../daos/userDaoFactory.js";
 import { Carts } from "../models/car.model.js";
 import moment from "moment";
+import {mailService} from "../services/nodemail.js";
 
 const daoUser = UserDaoFactory.getDao(process.env.db);
 
@@ -24,7 +25,6 @@ const hashPasword = (password) => {
                 if(!user || !validPassword(password, user.password)){
                     return done(null, false, {message: 'Invalid username or password'});
                  }
-
                     return done(null, user);
             } catch (error) {
                 done (error);
@@ -54,8 +54,10 @@ const hashPasword = (password) => {
                     }
                    
                     const createdUser = await daoUser.create(newUser);
-                    //falta crear el CART del usuario
+                    // creo el carrito
                     await Carts.create({ username, products: [] , email: req.body.email, time });
+                    // envio el mail al admin para avisarle que se registro un nuevo usuario
+                     mailService.sendMail(newUser.username, newUser.email);
                     
                      req.user = createdUser;
                                    
@@ -63,7 +65,7 @@ const hashPasword = (password) => {
                 }  
                 catch (error) {
                     
-                    done("Error al buscar usuario", null) 
+                    done("Error al registrar el usuario", null) 
                 }
         
         })
