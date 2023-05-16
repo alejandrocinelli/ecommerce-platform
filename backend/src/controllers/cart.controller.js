@@ -173,7 +173,7 @@ const finishCart = async (req, res, next) => {
         // falta borrar el carrito 
        /* cart.products = [];
         await daoCart.update(cart._id, cart);
-        console.log("carrito borrado"+ cart)*/
+       */
       
         res.render("finishCart",{sendInfoFront});
     } catch (error) {

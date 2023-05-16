@@ -11,9 +11,7 @@ const trasporter = createTransport({
       pass: process.env.TPWD,
     },
   });
-
- 
-   
+    
   const sendMail = async (usuario,mail ) => {
 
     const mailOptions = {
@@ -22,9 +20,7 @@ const trasporter = createTransport({
     subject: "Nuevo Usuario Registrado",
     html: `<h3 style="color: blue;">usuario: ${usuario}</h3>
             <h3 style="color: blue;">mail: ${mail}</h3>
-            `,
-    
-  };
+            `,  };
   try {
     const info = await trasporter.sendMail(mailOptions);
   

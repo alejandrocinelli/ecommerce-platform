@@ -6,6 +6,7 @@ import cartRoutes from './cartRoutes.js';
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import infoRoutes from './infoRoutes.js';
+import {configureChatController} from '../controllers/chatController.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -20,6 +21,8 @@ router.get('/', (req, res) => {
     res.sendFile(join(__dirname, '../../views/index2.html'));
 });
 router.use("/info", infoRoutes)
+
+router.get('/chat', configureChatController.chatUsers);
 
 
 export default router;

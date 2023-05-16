@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>The Shoes Sail</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css">
+    <script src="/socket.io/socket.io.js"></script>  
   </head>
   <body>
     <!-- Navbar -->
@@ -38,12 +39,13 @@
         <div class="col-md-6">
           <h1 class="fw-bold">Zapatillas en venta</h1>
           <p class="lead">Descripción breve de las zapatillas en venta.</p>
-          <a href="#" class="btn btn-primary">Comprar ahora</a>
+          <a href="/auth/login" class="btn btn-primary">Comprar ahora</a>
         </div>
       </div>
     </div>
 
     <!-- Scripts -->
+    <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
