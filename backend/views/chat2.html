@@ -1,37 +1,22 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container">
-    <a class="navbar-brand" href="/auth/login">The Shoes Shop</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      
-      <ul class="navbar-nav ms-auto me-0">
-      
-        <li class="nav-item">
-          <a class="nav-link" href="/auth/cart">Cart</a>
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link" href="/auth/admin">Admin</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/auth/logout">Logout</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<h3 class="text-center mt-2">Bienvenidos al Chat  {{user}} </h3>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHAT</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <h3 class="text-center mt-2">Bienvenidos al Chat  </h3>
 
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-lg-6 col-md-8 col-sm-10">
       <form id="chatForm" class="mb-4 bg-light p-4 rounded">
         <div class="mb-3">
-          <label for="email" class="form-label"  >Email</label>
-          <input id="email" type="email" name="email" value="{{email}}" class="form-control" placeholder="Ingresa tu email" required>
+          <label for="email" class="form-label">Email</label>
+          <input id="email" type="email" name="email" class="form-control" placeholder="Ingresa tu email" required>
         </div>
         <div class="mb-3">
           <label for="message" class="form-label">Mensaje</label>
@@ -43,8 +28,9 @@
   </div>
 </div>
 
-<div class="container text-center" id="messageForm">
+<div id="messageForm">
 
+</div>
 <script src="/socket.io/socket.io.js"></script>
 
 <script>
@@ -55,7 +41,8 @@ const emailInput = document.getElementById("email");
 const chatPool = document.getElementById("messageForm");
 
 const sendMsg = (msgInfo) => {
-   
+    console.log("enviando mensaje desde el front");
+    console.log(msgInfo)
   socket.emit("client:message", msgInfo);
 } 
 
@@ -64,11 +51,7 @@ const renderChat =  (chat) => {
     const html =  chat.map ((msg) => {
         return (`
         
-        <p> 
-        <span class="text-primary" >${msg.username} </span>
-        <span class="text-success" > ${msg.message}</span> 
-         <span class="text-danger"> ${msg.time}</span> 
-         </p>
+        <p> <span class="text-primary" >${msg.email} </span><span class="text-danger"> ${msg.time}</span> <span class="text-success" > ${msg.message}</span>  </p>
                 
         `);
 
@@ -93,4 +76,5 @@ chatForm.addEventListener("submit", submitHandlerChat);
 socket.on("server:message",renderChat)
 
 </script>
-</div>
+</body>
+</html>

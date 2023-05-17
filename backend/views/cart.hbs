@@ -1,11 +1,31 @@
-
-<div class="container text-center  jumbotron mt-5">
-  <div class="d-flex justify-content-center">
-    
-    <form action="/auth/login" method="get" class="">
-      <input class="btn btn-primary mb-3 mr-3" type="submit" value="Volver al Login" />
-    </form>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="/auth/login">The Shoes Shop</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      
+      <ul class="navbar-nav ms-auto me-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/auth/chat">Chat</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/auth/login">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/auth/admin">Admin</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/auth/logout">Logout</a>
+        </li>
+      </ul>
+    </div>
   </div>
+</nav>
+
+<div class="container text-center jumbotron mt-2 ">
+  
 <div class="container">
     
   <h2><i>List of Products </i></h2>
@@ -46,10 +66,12 @@
     <form action="/auth/emptyCart" method="POST" class="mt-5">
       <input class="btn btn-danger mb-3 mr-3" type="submit" value="Empty Cart" />
     </form>
+    <form action="/auth/finish" method="post" class="">
+      <input class="btn btn-primary mb-3 mr-3" type="submit" value="Finish Order" />
+    </form>
   {{else}}
     <p>No se encontraron productos.</p>
   {{/if}}
-  <form action="/auth/finish" method="post" class="">
-      <input class="btn btn-primary mb-3 mr-3" type="submit" value="Finish Order" />
-    </form>
+  
+</div>
 </div>

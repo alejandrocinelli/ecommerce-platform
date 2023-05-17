@@ -88,12 +88,13 @@ const io = new IOServer(expressServer);
 const time = moment().format('DD MM YYYY HH:mm:ss');
 
 io.on("connection", async (socket) => {
-  console.log("New client connected");
+  console.log("New client connected id: " + socket.id);
 
   socket.emit("server:message", await Chat.find());
-
+ 
   socket.on("client:message", async (messageInfo) => {
-    await Chat.save({ ...messageInfo, time });
+    
+    await Chat.create({ ...messageInfo, time });
     io.emit("server:message", await Chat.find());
 });
 
