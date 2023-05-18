@@ -1,6 +1,8 @@
 <div class="container text-center my-3">
     <div class="jumbotron" style="background-color: red;color: white;">
         <h1>ROUTING ERROR</h1>
+        <p>La página solicitada no existe</p>
+        <p>Redireccionando a la página de login...</p>
     </div>
 </div>
 
@@ -11,7 +13,7 @@
 
     function volver() {
         console.log('volver');
-        setTimeout(redireccionar, 2500, 'auth/login');
+        setTimeout(redireccionar, 1000, '/');
     }
 
     volver();

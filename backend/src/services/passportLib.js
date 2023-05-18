@@ -41,7 +41,7 @@ const hashPasword = (password) => {
                     const existUser = await User.findOne({username});
                    
                     if(existUser){ 
-                        
+                        console.log("El usuario ya existe")
                         return done(null, false, {message: 'El usuario ya existe'})
                     }
                     
@@ -65,7 +65,7 @@ const hashPasword = (password) => {
                 }  
                 catch (error) {
                     
-                    done("Error al registrar el usuario", null) 
+                    done("Error al registrar el usuario o usuario ya existente", null) 
                 }
         
         })

@@ -7,6 +7,7 @@ import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import infoRoutes from './infoRoutes.js';
 import {configureChatController} from '../controllers/chatController.js';
+import {configureErrorController} from '../controllers/errorController.js';
 import chatRoutes from './chatRoutes.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -23,6 +24,7 @@ router.get('/', (req, res) => {
     res.sendFile(join(__dirname, '../../views/index2.html'));
 });
 router.use("/info", infoRoutes)
+router.get("*", configureErrorController.errorReq)
 
 //router.get('/chat', configureChatController.chatUsers);
 
