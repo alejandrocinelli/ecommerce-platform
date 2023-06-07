@@ -133,6 +133,7 @@ const emptyCart = async (req, res, next) => {
         cart.products = [];
         await daoCart.update(cart._id, cart);
         res.render('cart', {cart});
+        
     } catch (error) {
         next(error);
     }
