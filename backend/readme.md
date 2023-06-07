@@ -1,15 +1,15 @@
-#Ecommerce Backend API
-Backend de un ecommerce utilizando Node.js, Express y MongoDB. 
+# Ecommerce Backend API
+Backend de un ecommerce utilizando Node.js, Express y MongoDB, Passport para la autenticación.
 El frontend de este proyecto se sirvio desde el servidor utilizando Handlebars.(Se esta trabajando en la version React) 
 
-##Instalación
+## Instalación
 
 Clonar el repositorio.
 Instalar las dependencias con el comando npm install.
 Configurar las variables de entorno. (Explicado en la siguiente sección).
 Arrancar el proyecto con el comando npm start.
 
-###Variables de Entorno
+### Variables de Entorno
 
 DATABASE_URl = URL de conexión a la base de datos.
 db=MONGO
